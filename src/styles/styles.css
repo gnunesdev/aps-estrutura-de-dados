@@ -1,0 +1,101 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7159c1;
+}
+
+.order {
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  background-color: white;
+  padding: 40px;
+}
+
+.order__title {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: bold;
+  color: black;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.order__container {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.order__values-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.order__input {
+  padding: 6px 10px;
+}
+
+.order__btn {
+  background-color: #7159c1;
+  color: white;
+  height: 36px;
+  border: 1px solid #7159c1;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  transition: 0.235s all cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.order__values .order__btn {
+  margin-left: 8px;
+}
+
+.order__btn:hover {
+  background-color: #443280;
+  border: 1px solid #443280;
+}
+
+.order__numbers,
+.order__time {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order__buttons-container {
+  margin-top: 10px;
+  display: flex;
+}
+
+.order__buttons-container .order__btn:not(:first-child) {
+  margin-left: 8px;
+}
+
+/* intersection animation */
+.has--reveal {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 1, 1),
+    opacity 0.5s cubic-bezier(0.4, 0, 1, 1);
+  will-change: transform, opacity;
+  height: 0;
+  opacity: 0;
+  transform: translate3d(0px, 30%, 0);
+}
+
+.has--reveal.is--animated {
+  transition: transform 0.5s cubic-bezier(0, 0, 0.2, 1),
+    opacity 0.5s cubic-bezier(0, 0, 0.2, 1);
+  transform: translateY(0);
+  height: auto;
+  opacity: 1;
+}
