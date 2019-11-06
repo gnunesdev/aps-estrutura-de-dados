@@ -1,8 +1,8 @@
-import intersaction from "./intersaction.js";
+import { scrollReveal } from "./animationHelpers.js";
 import order from "./order.js";
 
 const init = () => {
-  intersaction.init();
+  scrollReveal();
   order.init();
 };
 
