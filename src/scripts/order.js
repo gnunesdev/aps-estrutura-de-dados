@@ -40,7 +40,9 @@ function validateArray(arrayValues) {
   }
 
   if (arrayWithoutSpaces.endsWith(',')) {
-    const
+    errorMsg = 'Digite os valores corretamente sem vírgula ou outros caracteres no final.';
+
+    return errorMsg;
   }
 
   //split values in a array
@@ -52,12 +54,6 @@ function validateArray(arrayValues) {
     return errorMsg;
   }
 
-  return numberArray;
-}
-
-function cleanArray(arrayValues) {
-  const numberArray = arrayValues.split(',').map(Number);
-  console.log(numberArray);
   return numberArray;
 }
 
@@ -82,7 +78,7 @@ function callOrderMethod(ev) {
   const idBtnCalled = ev.target.id;
 
   const arrayValues = document.getElementById("arrayValues").value;
-  const arrayValidated = cleanArray(arrayValues);
+  const arrayValidated = arrayValues.split(',').map(Number);
 
   let arrayOrdered = [];
   let startTime, finalTime;
@@ -102,5 +98,18 @@ function callOrderMethod(ev) {
   }
 
   containerAnimation("is--third-step", "is--second-step");
-  setFinalValues(arrayOrdered, startTime, finalTime);
+  setFinalValues(arrayValues, arrayOrdered, startTime, finalTime);
+}
+
+function setFinalValues(arrayDisordered, arrayOrdered, startTime, finalTime) {
+  //get elements to show final values
+  const labelDisorderedArray = document.getElementById("labelArrayDisorderedValues");
+  const labelOrderedArray = document.getElementById("labelArrayOrderedValues");
+  const labelExecutionTime = document.getElementById("labelExecutionTime");
+
+  labelDisorderedArray.innerHTML = arrayDisordered;
+  // labelOrderedArray.innerHTML = arrayOrdered;
+
+  const executionTime = finalTime - startTime;
+  labelExecutionTime.innerHTML = `${executionTime}ms`
 }
