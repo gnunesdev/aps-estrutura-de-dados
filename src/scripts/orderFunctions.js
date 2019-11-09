@@ -1,4 +1,3 @@
-// QUICK SORT BY JOSÉ VITOR
 export function orderByQuickSort(vetor) {
   if (vetor.length <= 1) {
     return vetor;
@@ -25,9 +24,8 @@ export function orderByQuickSort(vetor) {
   }
 }
 
-// BUBBLE SORT BY GUILHERME NUNES
 export function orderByBubbleSort(array) {
-  const arrayToOrder = array;
+  let arrayToOrder = [...array];
   let len = arrayToOrder.length;
   let swapped;
   do {
@@ -42,4 +40,19 @@ export function orderByBubbleSort(array) {
     }
   } while (swapped);
   return arrayToOrder;
+}
+
+export function orderBySelectionSort(array) {
+  for (var i = 0; i < array.length; i++) {
+    var min = i;
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j;
+      }
+    }
+    var temp = array[i];
+    array[i] = array[min];
+    array[min] = temp;
+  }
+  return array;
 }

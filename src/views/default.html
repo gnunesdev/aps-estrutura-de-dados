@@ -1,80 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APS - ESTRUTURA DE DADOS</title>
+    <!-- css styles -->
+    <link rel="stylesheet" href="./../styles/reset.css" />
+    <link rel="stylesheet" href="./../styles/styles.css" />
+    <!-- js script -->
+    <script type="module" src="./../scripts/index.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>APS - ESTRUTURA DE DADOS</title>
-  <!-- css styles -->
-  <link rel="stylesheet" href="./../styles/reset.css" />
-  <link rel="stylesheet" href="./../styles/styles.css" />
-  <!-- js script -->
-  <script type="module" src="./../scripts/index.js"></script>
-</head>
+  <body>
+    <main>
+      <section class="order has--reveal js--reveal">
+        <h1 class="order__title">Ordenação de Vetores</h1>
 
-<body>
-  <main>
-    <section class="order has--reveal js--reveal">
-      <h1 class="order__title">Ordenação de Vetores</h1>
+        <!-- first step -->
+        <div class="order__container is--first-step has--reveal js--reveal">
+          <div class="order__values">
+            <p class="order__text">
+              Digite os valores do vetor à serem ordenados separados por
+              vírgula:
+            </p>
+            <div class="order__values-container">
+              <input
+                class="order__input"
+                type="text"
+                name="arrayValues"
+                id="arrayValues"
+                placeholder="ex: 20, 10, 5, 2"
+              />
+              <button class="order__btn" id="btnSendNumbers">
+                Enviar números
+              </button>
+            </div>
+          </div>
+        </div>
 
-      <!-- first step -->
-      <div class="order__container is--first-step has--reveal js--reveal">
-        <div class="order__values">
+        <!-- second step -->
+        <div
+          class="order__container is--second-step is--inactive has--reveal js--reveal"
+        >
           <p class="order__text">
-            Digite os valores do vetor à serem ordenados separados por
-            vírgula:
+            Os valores digitados foram:
           </p>
-          <div class="order__values-container">
-            <input class="order__input" type="text" name="arrayValues" id="arrayValues"
-              placeholder="ex: 20, 10, 5, 2" />
-            <button class="order__btn" id="btnSendNumbers">
-              Enviar números
+          <p class="order__numbers" id="labelArrayValues">2, 3, 4, 5</p>
+          <p class="order__text">
+            Que método de ordenação você deseja utilizar?
+          </p>
+          <div class="order__buttons-container">
+            <button class="order__btn" id="btnQuickSort">
+              Quick Sort
+            </button>
+            <button class="order__btn" id="btnBubbleSort">
+              Bubble sort
+            </button>
+            <button class="order__btn" id="btnSelectionSort">
+              Selection sort
             </button>
           </div>
         </div>
-      </div>
 
-      <!-- second step -->
-      <div class="order__container is--second-step is--inactive has--reveal js--reveal">
-        <p class="order__text">
-          Os valores digitados foram:
-        </p>
-        <p class="order__numbers" id="labelArrayValues">2, 3, 4, 5</p>
-        <p class="order__text">
-          Que método de ordenação você deseja utilizar?
-        </p>
-        <div class="order__buttons-container">
-          <button class="order__btn" id="btnQuickSort">
-            Quick Sort
-          </button>
-          <button class="order__btn" id="btnBubbleSort">
-            Bubble sort
-          </button>
+        <!-- third step -->
+        <div
+          class="order__container is--third-step is--inactive has--reveal js--reveal"
+        >
+          <p class="order__text">
+            Vetor original:
+          </p>
+          <p class="order__numbers" id="labelArrayDisorderedValues"></p>
+          <p class="order__text">
+            Vetor ordenado:
+          </p>
+          <p class="order__numbers" id="labelArrayOrderedValues"></p>
+          <p class="order__text">
+            Tempo de execução:
+          </p>
+          <p class="order__time" id="labelExecutionTime"></p>
+          <div class="order__buttons-container">
+            <button class="order__btn" id="btnOrderAgain">
+              Ordenar novamente
+            </button>
+          </div>
         </div>
-      </div>
-
-      <!-- third step -->
-      <div class="order__container is--third-step is--inactive has--reveal js--reveal">
-        <p class="order__text">
-          Vetor original:
-        </p>
-        <p class="order__numbers" id="labelArrayDisorderedValues">2, 3, 4, 5</p>
-        <p class="order__text">
-          Vetor ordenado:
-        </p>
-        <p class="order__numbers" id="labelArrayOrderedValues">2, 3, 4, 5</p>
-        <p class="order__text">
-          Tempo de execução:
-        </p>
-        <p class="order__time" id="labelExecutionTime">0.23232ms</p>
-        <div class="order__buttons-container">
-          <button class="order__btn" id="btnOrderAgain">
-            Ordenar novamente
-          </button>
-        </div>
-      </div>
-    </section>
-  </main>
-</body>
-
+      </section>
+    </main>
+  </body>
 </html>

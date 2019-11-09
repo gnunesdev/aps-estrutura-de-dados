@@ -7,7 +7,6 @@ export function scrollReveal() {
 }
 
 export function containerAnimation(containerToAnimate, containerToRemove) {
-  console.log('called');
   const containerAnimating = document.getElementsByClassName(
     containerToAnimate
   )[0];

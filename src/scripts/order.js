@@ -1,5 +1,9 @@
-import { containerAnimation } from './animationHelpers.js';
-import { orderByQuickSort, orderByBubbleSort } from './orderFunctions.js';
+import { containerAnimation } from "./animationHelpers.js";
+import {
+  orderByQuickSort,
+  orderByBubbleSort,
+  orderBySelectionSort
+} from "./orderFunctions.js";
 
 export default {
   init() {
@@ -7,6 +11,7 @@ export default {
   }
 };
 
+//GLOBAL VAR - ARRAY DISORDERED AFTER VALIDATED
 let arrayCleaned;
 
 function appendListeners() {
@@ -23,33 +28,40 @@ function appendListeners() {
     .addEventListener("click", callOrderMethod);
 
   document
-    .getElementById("btnOrderAgain")
-    .addEventListener("click", () => containerAnimation("is--first-step", "is--third-step"));
+    .getElementById("btnSelectionSort")
+    .addEventListener("click", callOrderMethod);
+
+  document.getElementById("btnOrderAgain").addEventListener("click", () => {
+    containerAnimation("is--first-step", "is--third-step");
+    const inputNumbers = document.getElementById("arrayValues");
+    inputNumbers.value = "";
+  });
 }
 
 function validateArray(arrayValues) {
   let errorMsg;
 
   //remove whitespaces
-  const arrayWithoutSpaces = arrayValues.replace(/\s/g, '');
+  const arrayWithoutSpaces = arrayValues.replace(/\s/g, "");
 
-  if (!(/^[0-9,]+$/.test(arrayWithoutSpaces))) {
-    errorMsg = 'Digite somente números separados por vírgula';
+  if (!/^[0-9,]+$/.test(arrayWithoutSpaces)) {
+    errorMsg = "Digite somente números separados por vírgula";
 
     return errorMsg;
   }
 
-  if (arrayWithoutSpaces.endsWith(',')) {
-    errorMsg = 'Digite os valores corretamente sem vírgula ou outros caracteres no final.';
+  if (arrayWithoutSpaces.endsWith(",")) {
+    errorMsg =
+      "Digite os valores corretamente sem vírgula ou outros caracteres no final.";
 
     return errorMsg;
   }
 
   //split values in a array
-  const numberArray = arrayWithoutSpaces.split(',').map(Number);
+  const numberArray = arrayWithoutSpaces.split(",").map(Number);
 
   if (arrayValues.length <= 1) {
-    errorMsg = 'Insira mais de um valor no vetor à ser ordenado';
+    errorMsg = "Insira mais de um valor no vetor à ser ordenado";
 
     return errorMsg;
   }
@@ -63,13 +75,15 @@ function sendArray() {
   const validatedResult = validateArray(arrayValues);
 
   if (Array.isArray(validatedResult)) {
+    //function validateArray returned an array
     arrayCleaned = validatedResult;
 
-    const labelArrayValues = document.getElementById('labelArrayValues');
+    const labelArrayValues = document.getElementById("labelArrayValues");
     labelArrayValues.innerHTML = arrayCleaned;
 
     containerAnimation("is--second-step", "is--first-step");
   } else {
+    //function validateArray returned an error, so we alert it
     alert(validatedResult);
   }
 }
@@ -77,39 +91,50 @@ function sendArray() {
 function callOrderMethod(ev) {
   const idBtnCalled = ev.target.id;
 
-  const arrayValues = document.getElementById("arrayValues").value;
-  const arrayValidated = arrayValues.split(',').map(Number);
-
-  let arrayOrdered = [];
+  const arrayDisordered = [...arrayCleaned];
+  let arrayOrdered;
   let startTime, finalTime;
 
-  if (idBtnCalled == 'btnQuickSort') {
+  //quick sort
+  if (idBtnCalled == "btnQuickSort") {
     startTime = performance.now();
-    arrayOrdered = orderByQuickSort(arrayValidated);
+    arrayOrdered = orderByQuickSort(arrayDisordered);
     finalTime = performance.now();
-  } else if (idBtnCalled == 'btnBubbleSort') {
+  }
+  //bubble sort
+  else if (idBtnCalled == "btnBubbleSort") {
     startTime = performance.now();
-    arrayOrdered = orderByBubbleSort(arrayValidated);
+    arrayOrdered = orderByBubbleSort(arrayDisordered);
     finalTime = performance.now();
-  } else if (idBtnCalled == 'btnRandomSort') {
-    console.log('waiting implementation');
-  } else {
-    console.error('different id expected');
+  }
+  // selection sort
+  else if (idBtnCalled == "btnSelectionSort") {
+    startTime = performance.now();
+    arrayOrdered = orderBySelectionSort(arrayDisordered);
+    finalTime = performance.now();
+  }
+  // error
+  else {
+    console.error("different id expected");
   }
 
   containerAnimation("is--third-step", "is--second-step");
-  setFinalValues(arrayValues, arrayOrdered, startTime, finalTime);
+  setFinalValues(arrayOrdered, startTime, finalTime);
 }
 
-function setFinalValues(arrayDisordered, arrayOrdered, startTime, finalTime) {
-  //get elements to show final values
-  const labelDisorderedArray = document.getElementById("labelArrayDisorderedValues");
+function setFinalValues(arrayOrdered, startTime, finalTime) {
+  // get elements to put values
+  const labelDisorderedArray = document.getElementById(
+    "labelArrayDisorderedValues"
+  );
   const labelOrderedArray = document.getElementById("labelArrayOrderedValues");
   const labelExecutionTime = document.getElementById("labelExecutionTime");
 
-  labelDisorderedArray.innerHTML = arrayDisordered;
-  // labelOrderedArray.innerHTML = arrayOrdered;
-
+  // calculate time of array ordination
   const executionTime = finalTime - startTime;
-  labelExecutionTime.innerHTML = `${executionTime}ms`
+
+  // put values
+  labelDisorderedArray.innerHTML = arrayCleaned;
+  labelOrderedArray.innerHTML = arrayOrdered;
+  labelExecutionTime.innerHTML = `${executionTime}ms`;
 }
