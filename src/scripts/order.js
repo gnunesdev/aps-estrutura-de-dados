@@ -11,8 +11,25 @@ export default {
   }
 };
 
-//GLOBAL VAR - ARRAY DISORDERED AFTER VALIDATED
+// GLOBAL VAR - ARRAY DISORDERED AFTER VALIDATED
 let arrayCleaned;
+
+// GLOBAL VAR - VALUES AMBIENT
+let isAmbientOrder = false;
+
+// GLOBAL VAR - VALUES AMBIENT
+const arrayAmbientValues = [
+  3500000000,
+  3800000000,
+  3900000000,
+  4300000000,
+  5000000000,
+  3600000000,
+  3600000000,
+  3500000000,
+  3900000000,
+  3700000000
+];
 
 function appendListeners() {
   document
@@ -31,10 +48,27 @@ function appendListeners() {
     .getElementById("btnSelectionSort")
     .addEventListener("click", callOrderMethod);
 
+  document
+    .getElementById("btnQuickSortAmbient")
+    .addEventListener("click", callOrderMethod);
+
+  document
+    .getElementById("btnBubbleSortAmbient")
+    .addEventListener("click", callOrderMethod);
+
+  document
+    .getElementById("btnSelectionSortAmbient")
+    .addEventListener("click", callOrderMethod);
+
   document.getElementById("btnOrderAgain").addEventListener("click", () => {
     containerAnimation("is--first-step", "is--third-step");
     const inputNumbers = document.getElementById("arrayValues");
     inputNumbers.value = "";
+  });
+
+  document.getElementById("btnSeeGraph").addEventListener("click", () => {
+    containerAnimation("is--ambient-second-step", "is--first-step");
+    isAmbientOrder = true;
   });
 }
 
@@ -90,25 +124,39 @@ function sendArray() {
 
 function callOrderMethod(ev) {
   const idBtnCalled = ev.target.id;
+  let arrayDisordered;
 
-  const arrayDisordered = [...arrayCleaned];
+  if (isAmbientOrder) {
+    // ambient order
+    arrayDisordered = [...arrayAmbientValues];
+  } else {
+    // normal
+    arrayDisordered = [...arrayCleaned];
+  }
+
   let arrayOrdered;
   let startTime, finalTime;
 
   //quick sort
-  if (idBtnCalled == "btnQuickSort") {
+  if (idBtnCalled == "btnQuickSort" || idBtnCalled == "btnQuickSortAmbient") {
     startTime = performance.now();
     arrayOrdered = orderByQuickSort(arrayDisordered);
     finalTime = performance.now();
   }
   //bubble sort
-  else if (idBtnCalled == "btnBubbleSort") {
+  else if (
+    idBtnCalled == "btnBubbleSort" ||
+    idBtnCalled == "btnBubbleSortAmbient"
+  ) {
     startTime = performance.now();
     arrayOrdered = orderByBubbleSort(arrayDisordered);
     finalTime = performance.now();
   }
   // selection sort
-  else if (idBtnCalled == "btnSelectionSort") {
+  else if (
+    idBtnCalled == "btnSelectionSort" ||
+    idBtnCalled == "btnSelectionSortAmbient"
+  ) {
     startTime = performance.now();
     arrayOrdered = orderBySelectionSort(arrayDisordered);
     finalTime = performance.now();
@@ -118,7 +166,12 @@ function callOrderMethod(ev) {
     console.error("different id expected");
   }
 
-  containerAnimation("is--third-step", "is--second-step");
+  if (isAmbientOrder) {
+    containerAnimation("is--third-step", "is--ambient-second-step");
+  } else {
+    containerAnimation("is--third-step", "is--second-step");
+  }
+
   setFinalValues(arrayOrdered, startTime, finalTime);
 }
 
@@ -134,7 +187,11 @@ function setFinalValues(arrayOrdered, startTime, finalTime) {
   const executionTime = finalTime - startTime;
 
   // put values
-  labelDisorderedArray.innerHTML = arrayCleaned;
+  if (isAmbientOrder) {
+    labelDisorderedArray.innerHTML = arrayAmbientValues;
+  } else {
+    labelDisorderedArray.innerHTML = arrayCleaned;
+  }
   labelOrderedArray.innerHTML = arrayOrdered;
   labelExecutionTime.innerHTML = `${executionTime}ms`;
 }

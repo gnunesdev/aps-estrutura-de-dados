@@ -72,6 +72,7 @@ main {
   line-height: 30px;
   font-weight: bold;
   margin-bottom: 10px;
+  word-break: break-all;
 }
 
 .order__buttons-container {
@@ -102,4 +103,104 @@ main {
   transform: translateY(0);
   height: auto;
   opacity: 1;
+}
+
+.order__ambient {
+  border-top: 1px solid #b8b6bb;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.order__ambient .order__btn {
+  margin-top: 10px;
+}
+
+.order__graph {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.order__graph-btn {
+  background-color: #443280;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.order__graph-btn:hover .order__graph-btn--tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.order__graph-btn .order__graph-btn--tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 145%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 14px;
+}
+
+.order__graph-btn .order__graph-btn--tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* positions */
+.order__graph-btn.is--2009 {
+  top: 271px;
+  left: 57px;
+}
+.order__graph-btn.is--2010 {
+  top: 234px;
+  left: 120px;
+}
+.order__graph-btn.is--2011 {
+  top: 221px;
+  left: 182px;
+}
+.order__graph-btn.is--2012 {
+  top: 170px;
+  left: 244px;
+}
+.order__graph-btn.is--2013 {
+  top: 81px;
+  left: 305px;
+}
+.order__graph-btn.is--2014 {
+  top: 258px;
+  left: 369px;
+}
+.order__graph-btn.is--2015 {
+  top: 258px;
+  left: 431px;
+}
+.order__graph-btn.is--2016 {
+  top: 271px;
+  left: 493px;
+}
+.order__graph-btn.is--2017 {
+  top: 222px;
+  left: 555px;
+}
+.order__graph-btn.is--2018 {
+  top: 246px;
+  left: 617px;
 }
