@@ -80,7 +80,7 @@ function validateArray(arrayValues) {
     .filter(item => item.trim() !== "")
     .map(Number);
 
-  if (arrayValues.length <= 1) {
+  if (numberArray.length <= 1) {
     errorMsg = "Insira mais de um valor no vetor à ser ordenado";
 
     return errorMsg;
