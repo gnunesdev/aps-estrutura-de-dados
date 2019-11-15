@@ -18,18 +18,7 @@ let arrayCleaned;
 let isAmbientOrder = false;
 
 // GLOBAL VAR - VALUES AMBIENT
-const arrayAmbientValues = [
-  3500000000,
-  3800000000,
-  3900000000,
-  4300000000,
-  5000000000,
-  3600000000,
-  3600000000,
-  3500000000,
-  3900000000,
-  3700000000
-];
+const arrayAmbientValues = [3.5, 3.8, 3.9, 4.3, 5.0, 3.6, 3.6, 3.5, 3.9, 3.7];
 
 function appendListeners() {
   document
@@ -64,6 +53,7 @@ function appendListeners() {
     containerAnimation("is--first-step", "is--third-step");
     const inputNumbers = document.getElementById("arrayValues");
     inputNumbers.value = "";
+    isAmbientOrder = false;
   });
 
   document.getElementById("btnSeeGraph").addEventListener("click", () => {
@@ -84,15 +74,11 @@ function validateArray(arrayValues) {
     return errorMsg;
   }
 
-  if (arrayWithoutSpaces.endsWith(",")) {
-    errorMsg =
-      "Digite os valores corretamente sem vírgula ou outros caracteres no final.";
-
-    return errorMsg;
-  }
-
   //split values in a array
-  const numberArray = arrayWithoutSpaces.split(",").map(Number);
+  const numberArray = arrayWithoutSpaces
+    .split(",")
+    .filter(item => item.trim() !== "")
+    .map(Number);
 
   if (arrayValues.length <= 1) {
     errorMsg = "Insira mais de um valor no vetor à ser ordenado";

@@ -14,7 +14,7 @@ main {
 
 .order {
   width: 100%;
-  max-width: 700px;
+  max-width: 674px;
   height: auto;
   background-color: white;
   padding: 40px;
@@ -119,6 +119,13 @@ main {
   margin-top: 20px;
   margin-bottom: 20px;
   position: relative;
+}
+
+.order__graph-font {
+  display: block;
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
 }
 
 .order__graph-btn {
